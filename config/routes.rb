@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :characters, only: [:index]
       resources :users, only: [:create]
+      resource :session, only: [:create, :destroy]
     end
     
 
