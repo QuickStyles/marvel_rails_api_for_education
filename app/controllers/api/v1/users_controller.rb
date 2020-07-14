@@ -9,10 +9,23 @@ class Api::V1::UsersController < ApplicationController
     end
   end
 
+
+  def current
+    # get id from cookie
+    # query database for user
+    # return the user data
+    user_id = session[:user_id]
+    userData = User.find user_id
+    render({json: userData})
+  end
+
   private
 
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 
+
+
 end
+
