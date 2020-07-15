@@ -11,6 +11,31 @@ file = File.open "#{__dir__}/../data/page_0.json";
 
 # data is an array of all our characters
 data = JSON.load file
+Character.destroy_all
+Deck.destroy_all
+User.destroy_all
+
+PASSWORD = 'supersecret'
+
+super_user = User.create({
+  username: 'brandon',
+  email: 'js@winterfell.gov',
+  password: PASSWORD
+})
+
+10.times do 
+  u = User.create({
+    username: Faker::Name.first_name,
+    email: Faker::Internet.email,
+    password: PASSWORD
+  })
+  2.times do
+    Deck.create({
+      name: Faker::Artist.name,
+      user_id: u.id
+    })
+  end
+end
 
 data.each { |character|
   Character.create(
@@ -27,5 +52,14 @@ data.each { |character|
   )
 }
 
+cards = Character.all
+
+NUMBER_OF_CARDS_PER_DECK = 5
+decks = Deck.all
+decks.each do |deck|
+  NUMBER_OF_CARDS_PER_DECK.times do
+    deck.characters << cards.sample
+  end
+end
 
 file.close
