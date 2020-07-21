@@ -11,7 +11,7 @@ file = File.open "#{__dir__}/../data/page_0.json";
 
 # data is an array of all our characters
 data = JSON.load file
-Character.destroy_all
+Card.destroy_all
 Deck.destroy_all
 User.destroy_all
 
@@ -37,28 +37,28 @@ super_user = User.create({
   end
 end
 
-data.each { |character|
-  Character.create(
-    character_id: character['id'],
-    name: character['name'],
-    description: character['description'],
-    thumbnail_url: "#{character['thumbnail']['path']}.#{character['thumbnail']['extension']}",
-    durability: character['attributes']['durability'],
-    energy: character['attributes']['energy'],
-    fighting_skills: character['attributes']['fighting skills'],
-    intelligence: character['attributes']['intelligence'],
-    speed: character['attributes']['speed'],
-    strength: character['attributes']['strength']
+data.each { |card|
+  Card.create(
+    card_id: card['id'],
+    name: card['name'],
+    description: card['description'],
+    thumbnail_url: "#{card['thumbnail']['path']}.#{card['thumbnail']['extension']}",
+    durability: card['attributes']['durability'],
+    energy: card['attributes']['energy'],
+    fighting_skills: card['attributes']['fighting skills'],
+    intelligence: card['attributes']['intelligence'],
+    speed: card['attributes']['speed'],
+    strength: card['attributes']['strength']
   )
 }
 
-cards = Character.all
+cards = Card.all
 
 NUMBER_OF_CARDS_PER_DECK = 5
 decks = Deck.all
 decks.each do |deck|
   NUMBER_OF_CARDS_PER_DECK.times do
-    deck.characters << cards.sample
+    deck.cards << cards.sample
   end
 end
 

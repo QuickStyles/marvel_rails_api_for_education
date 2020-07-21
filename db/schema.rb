@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2020_07_15_172756) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "characters", force: :cascade do |t|
-    t.integer "character_id"
+  create_table "cards", force: :cascade do |t|
+    t.integer "card_id"
     t.string "name"
     t.text "description"
     t.string "thumbnail_url"
@@ -30,13 +30,13 @@ ActiveRecord::Schema.define(version: 2020_07_15_172756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "deck_characters", force: :cascade do |t|
+  create_table "deck_cards", force: :cascade do |t|
     t.bigint "deck_id", null: false
-    t.bigint "character_id", null: false
+    t.bigint "card_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["character_id"], name: "index_deck_characters_on_character_id"
-    t.index ["deck_id"], name: "index_deck_characters_on_deck_id"
+    t.index ["card_id"], name: "index_deck_cards_on_card_id"
+    t.index ["deck_id"], name: "index_deck_cards_on_deck_id"
   end
 
   create_table "decks", force: :cascade do |t|
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2020_07_15_172756) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  add_foreign_key "deck_characters", "characters"
-  add_foreign_key "deck_characters", "decks"
+  add_foreign_key "deck_cards", "cards"
+  add_foreign_key "deck_cards", "decks"
   add_foreign_key "decks", "users"
 end

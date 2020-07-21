@@ -2,11 +2,11 @@ class Deck < ApplicationRecord
   belongs_to :user
 
   has_and_belongs_to_many(
-    :characters,
+    :cards,
     {
-      class_name: 'Character',
-      join_table: 'deck_characters',
-      association_foreign_key: 'character_id',
+      class_name: 'Card',
+      join_table: 'deck_cards',
+      association_foreign_key: 'card_id',
       foreign_key: 'deck_id'
     }
   )
