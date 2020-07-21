@@ -5,6 +5,7 @@ Rails.application.routes.draw do
       resources :characters, only: [:index]
       resources :users, only: [:create]
       resource :session, only: [:create, :destroy]
+      resources :decks, only: [:create]
       get '/users/current', to: "users#current" # GET /api/v1/users/current => UsersController#current
     end
     

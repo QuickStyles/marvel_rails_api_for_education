@@ -10,4 +10,7 @@ class Deck < ApplicationRecord
       foreign_key: 'deck_id'
     }
   )
+  # with the above association we get a few helper queries
+  # d = Deck.new
+  # d.characters = Characters.all
 end
