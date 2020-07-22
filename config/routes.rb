@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resource :session, only: [:create, :destroy]
       resources :decks, only: [:create]
       get '/users/current', to: "users#current" # GET /api/v1/users/current => UsersController#current
+      get '/users/decks', to: "users#current_user_decks" # GET /api/v1/users/decks => UsersController#current_user_decks
     end
     
 

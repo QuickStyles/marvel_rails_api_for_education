@@ -19,6 +19,20 @@ class Api::V1::UsersController < ApplicationController
     render({json: userData})
   end
 
+
+  def current_user_decks
+    user = User.includes(decks: [:cards]).find(session[:user_id])
+    decks_with_cards = []
+    user.decks.each do |deck, i|
+      deckObj = {}
+      deckObj['name'] = deck.name
+      deckObj['cards'] = deck.cards
+      decks_with_cards << deckObj
+    end
+
+    render({ json: decks_with_cards })
+  end
+
   private
 
   def user_params
