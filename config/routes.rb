@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       resources :cards, only: [:index]
       resources :users, only: [:create]
       resource :session, only: [:create, :destroy]
-      resources :decks, only: [:create]
+      resources :decks, only: [:create, :show]
       get '/users/current', to: "users#current" # GET /api/v1/users/current => UsersController#current
       get '/users/decks', to: "users#current_user_decks" # GET /api/v1/users/decks => UsersController#current_user_decks
     end

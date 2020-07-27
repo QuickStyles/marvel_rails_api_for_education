@@ -17,6 +17,18 @@ class Api::V1::DecksController < ApplicationController
     end
   end
 
+  def show
+    d = Deck.find params[:id]
+
+    deck = {
+      id: d.id,
+      name: d.name,
+      cards: d.cards
+    }
+
+    render(json: deck)
+  end
+
   private
 
   def deck_params
