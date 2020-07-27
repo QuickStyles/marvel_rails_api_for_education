@@ -25,6 +25,7 @@ class Api::V1::UsersController < ApplicationController
     decks_with_cards = []
     user.decks.each do |deck, i|
       deckObj = {}
+      deckObj['id'] = deck.id
       deckObj['name'] = deck.name
       deckObj['cards'] = deck.cards
       decks_with_cards << deckObj
