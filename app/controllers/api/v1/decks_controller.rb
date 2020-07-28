@@ -29,6 +29,28 @@ class Api::V1::DecksController < ApplicationController
     render(json: deck)
   end
 
+  def update
+    deck = Deck.find params[:id]
+    cards = deck_params[:selectedCards]
+
+    queriedCards = cards.map { |card|
+      # Card.where ( id: card[:id])
+      Card.find(card[:id])
+    }
+
+    updated_params = {
+      name: deck_params[:name],
+      cards: queriedCards
+    }
+
+    # if deck.update updated_params
+      render(json: { message: 'deck updated', id: deck.id})
+    # else
+    #   render(json: { message: 'it failed to update Deck', errors: deck.errors.full_messages, status: 422}, status: 422)
+    # end
+  
+  end
+
   private
 
   def deck_params
